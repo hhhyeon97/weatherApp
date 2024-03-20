@@ -1,5 +1,8 @@
 import { useEffect, useState } from 'react';
 import './App.css';
+import config from './config';
+
+const apiKey = config.apiKey;
 
 /*
 1. 앱이 실행되면 현재 위치 기반의 날씨가 보인다.
@@ -15,9 +18,21 @@ function App() {
     navigator.geolocation.getCurrentPosition((position) => {
       let lat = position.coords.latitude;
       let lon = position.coords.longitude;
-      console.log('현재 위치', lat, lon);
+      //console.log('현재 위치', lat, lon);
+      getWeatherByCurrentLocation(lat, lon);
     });
   };
+
+  const getWeatherByCurrentLocation = async (lat, lon) => {
+    let url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`;
+    let response = await fetch(url); //  생성한 URL을 사용하여 API에 요청을 보내고, 응답을 기다린다. ->
+    // fetch 함수를 사용하여 비동기적으로 HTTP 요청을 수행한다.
+    let data = await response.json(); //JSON 데이터를 JavaScript 객체로 파싱하여 저장
+    //API 요청에 대한 응답을 JSON 형식으로 파싱 - > response.json() 메서드를 사용하여 응답 본문을 JSON 형태로 변환 - >
+    // 이를 변수 data에 저장 후 콘솔에 JSON 형식으로 파싱된 API 응답 데이터 출력
+    console.log('data', data);
+  };
+
   useEffect(() => {
     getCurrentLocation();
   }, []);
