@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import config from './config';
+//import config from './config';
 import WeatherBox from './component/WeatherBox';
 import WeatherBtn from './component/WeatherBtn';
-const apiKey = config.apiKey;
-
+//const apiKey = config.apiKey;
+const apiKey = '74283380a215dbfef8e3232bcff5db70';
 /*
 1. 앱이 실행되면 현재 위치 기반의 날씨가 보인다.
 2. 날씨 정보에는 도시, 섭씨, 화씨, 날씨 상태
