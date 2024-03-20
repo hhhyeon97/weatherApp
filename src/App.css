@@ -1,0 +1,25 @@
+body {
+  background-image: url('https://i.pinimg.com/originals/72/0c/c4/720cc43d757ee638ad5054a05220fafe.gif');
+  height: 100vh;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  flex-direction: column;
+  color: white;
+  font-weight: bold;
+}
+
+.weather-box {
+  border: 3px solid white;
+  padding: 50px;
+  border-radius: 10px;
+  box-shadow: 2px 7px 15px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  backdrop-filter: blur(10px);
+}
