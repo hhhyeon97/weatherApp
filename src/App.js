@@ -16,6 +16,7 @@ const apiKey = config.apiKey;
 */
 function App() {
   const [weather, setWeather] = useState(null);
+  const [city, setCity] = useState('');
   const cities = ['paris', 'new york', 'tokyo', 'seoul'];
   const getCurrentLocation = () => {
     // console.log('getCurrentLocation!');
@@ -35,9 +36,31 @@ function App() {
     setWeather(data); // state에 현재 위치 기반 날씨 데이터 넣어주기
   };
 
+  const getWeatherByCity = async () => {
+    let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+    let response = await fetch(url);
+    let data = await response.json();
+    //console.log(`${city}의 날씨 data`, data);
+    setWeather(data);
+  };
+
+  // useEffect 하나로 병합 - > 상황에 맞춰서 호출을 달리하기 !
   useEffect(() => {
-    getCurrentLocation();
-  }, []);
+    if (city == '') {
+      getCurrentLocation();
+    } else {
+      getWeatherByCity();
+    }
+  }, [city]);
+
+  // useEffect의 역할 : component did update !
+  // city state를 주시하고 있다가 city가 바뀌면 useEffect 함수 호출해주는 역할
+  /*
+  useEffect(() => {
+    //console.log('city?', city);
+    getWeatherByCity();
+  }, [city]);
+  */
 
   // weather 정보를 props로서 WeatherBox에 보내기
 
@@ -45,7 +68,7 @@ function App() {
     <div>
       <div className="container">
         <WeatherBox weather={weather} />
-        <WeatherBtn cities={cities} />
+        <WeatherBtn cities={cities} setCity={setCity} />
       </div>
     </div>
   );
