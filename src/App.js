@@ -21,37 +21,59 @@ function App() {
   const [city, setCity] = useState('');
   const [loading, setLoading] = useState(false);
   const [selectedCity, setSelectedCity] = useState(null); // 선택된 도시를 관리하는 상태 추가
+  const [apiError, setApiError] = useState(null); // 에러 상태 추가
   const cities = ['paris', 'new york', 'tokyo', 'seoul'];
+
   const getCurrentLocation = () => {
-    // console.log('getCurrentLocation!');
-    navigator.geolocation.getCurrentPosition((position) => {
-      let lat = position.coords.latitude;
-      let lon = position.coords.longitude;
-      //console.log('현재 위치', lat, lon);
-      getWeatherByCurrentLocation(lat, lon);
-    });
+    try {
+      navigator.geolocation.getCurrentPosition((position) => {
+        let lat = position.coords.latitude;
+        let lon = position.coords.longitude;
+        getWeatherByCurrentLocation(lat, lon);
+      });
+    } catch (error) {
+      console.log('에러', error);
+      setApiError('위치 정보를 가져오는 중 오류가 발생했습니다.');
+      setLoading(false);
+    }
   };
 
   const getWeatherByCurrentLocation = async (lat, lon) => {
-    let url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
-    setLoading(true);
-    let response = await fetch(url);
-    let data = await response.json();
-    //console.log('data', data);
-    setWeather(data); // state에 현재 위치 기반 날씨 데이터 넣어주기
-    setLoading(false);
-    setSelectedCity(null); // 현재 위치 버튼 클릭 시 선택된 도시를 null로 설정
+    try {
+      let url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
+      setLoading(true);
+      let response = await fetch(url);
+      let data = await response.json();
+      //console.log('data', data);
+      setWeather(data); // state에 현재 위치 기반 날씨 데이터 넣어주기
+      setLoading(false);
+      setSelectedCity(null); // 현재 위치 버튼 클릭 시 선택된 도시를 null로 설정
+      setApiError(null); // 에러 상태 초기화
+    } catch (error) {
+      console.log('에러', error);
+      setApiError('날씨 정보를 가져오는 중 오류가 발생했습니다.');
+      setLoading(false);
+      setSelectedCity(null);
+    }
   };
 
   const getWeatherByCity = async () => {
-    let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
-    setLoading(true);
-    let response = await fetch(url);
-    let data = await response.json();
-    //console.log(`${city}의 날씨 data`, data);
-    setWeather(data);
-    setLoading(false);
-    setSelectedCity(city); // 선택된 도시 업데이트
+    try {
+      let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+      setLoading(true);
+      let response = await fetch(url);
+      let data = await response.json();
+      //console.log(`${city}의 날씨 data`, data);
+      setWeather(data);
+      setLoading(false);
+      setSelectedCity(city); // 선택된 도시 업데이트
+      setApiError(null); // 에러 상태 초기화
+    } catch (error) {
+      console.log('에러', error);
+      setApiError('날씨 정보를 가져오는 중 오류가 발생했습니다.');
+      setLoading(false);
+      setSelectedCity(null);
+    }
   };
 
   // useEffect 하나로 병합 - > 상황에 맞춰서 호출을 달리하기 !
@@ -76,19 +98,25 @@ function App() {
 
   return (
     <div>
-      {loading ? (
+      {apiError ? ( // 에러 상태가 있는 경우 에러 메시지 표시
         <div className="container">
-          <ClipLoader color="#ffffff" loading={loading} size={50} />
+          <h2>에러 발생: {apiError}</h2>
         </div>
       ) : (
         <div className="container">
-          <WeatherBox weather={weather} />
-          <WeatherBtn
-            cities={cities}
-            setCity={setCity}
-            selectedCity={selectedCity}
-            getCurrentLocation={getCurrentLocation}
-          />
+          {loading ? (
+            <ClipLoader color="#ffffff" loading={loading} size={50} />
+          ) : (
+            <div>
+              <WeatherBox weather={weather} />
+              <WeatherBtn
+                cities={cities}
+                setCity={setCity}
+                selectedCity={selectedCity}
+                getCurrentLocation={getCurrentLocation}
+              />
+            </div>
+          )}
         </div>
       )}
     </div>

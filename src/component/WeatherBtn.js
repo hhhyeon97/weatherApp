@@ -5,20 +5,19 @@ import { Button } from 'react-bootstrap';
 
 const WeatherBtn = ({ cities, setCity, selectedCity, getCurrentLocation }) => {
   //console.log('cities?', cities);
-  const handleCityClick = (city) => {
-    setCity(city);
-  };
 
   return (
     <div>
       <Button
+        key="current-location"
         variant={selectedCity === null ? 'secondary' : 'light'}
         onClick={getCurrentLocation}
       >
         현재 위치
       </Button>
-      {cities.map((item) => (
+      {cities.map((item, index) => (
         <Button
+          key={index}
           variant={selectedCity === item ? 'primary' : 'light'}
           onClick={() => setCity(item)}
         >
