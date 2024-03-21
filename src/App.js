@@ -20,6 +20,7 @@ function App() {
   const [weather, setWeather] = useState(null);
   const [city, setCity] = useState('');
   const [loading, setLoading] = useState(false);
+  const [selectedCity, setSelectedCity] = useState(null); // 선택된 도시를 관리하는 상태 추가
   const cities = ['paris', 'new york', 'tokyo', 'seoul'];
   const getCurrentLocation = () => {
     // console.log('getCurrentLocation!');
@@ -39,6 +40,7 @@ function App() {
     //console.log('data', data);
     setWeather(data); // state에 현재 위치 기반 날씨 데이터 넣어주기
     setLoading(false);
+    setSelectedCity(null); // 현재 위치 버튼 클릭 시 선택된 도시를 null로 설정
   };
 
   const getWeatherByCity = async () => {
@@ -49,6 +51,7 @@ function App() {
     //console.log(`${city}의 날씨 data`, data);
     setWeather(data);
     setLoading(false);
+    setSelectedCity(city); // 선택된 도시 업데이트
   };
 
   // useEffect 하나로 병합 - > 상황에 맞춰서 호출을 달리하기 !
@@ -80,7 +83,12 @@ function App() {
       ) : (
         <div className="container">
           <WeatherBox weather={weather} />
-          <WeatherBtn cities={cities} setCity={setCity} />
+          <WeatherBtn
+            cities={cities}
+            setCity={setCity}
+            selectedCity={selectedCity}
+            getCurrentLocation={getCurrentLocation}
+          />
         </div>
       )}
     </div>
