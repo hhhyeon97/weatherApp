@@ -4,8 +4,10 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 //import config from './config';
 import WeatherBox from './component/WeatherBox';
 import WeatherBtn from './component/WeatherBtn';
+import ClipLoader from 'react-spinners/ClipLoader';
 //const apiKey = config.apiKey;
 const apiKey = '74283380a215dbfef8e3232bcff5db70';
+
 /*
 1. 앱이 실행되면 현재 위치 기반의 날씨가 보인다.
 2. 날씨 정보에는 도시, 섭씨, 화씨, 날씨 상태
@@ -17,6 +19,7 @@ const apiKey = '74283380a215dbfef8e3232bcff5db70';
 function App() {
   const [weather, setWeather] = useState(null);
   const [city, setCity] = useState('');
+  const [loading, setLoading] = useState(false);
   const cities = ['paris', 'new york', 'tokyo', 'seoul'];
   const getCurrentLocation = () => {
     // console.log('getCurrentLocation!');
@@ -30,18 +33,22 @@ function App() {
 
   const getWeatherByCurrentLocation = async (lat, lon) => {
     let url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
+    setLoading(true);
     let response = await fetch(url);
     let data = await response.json();
     //console.log('data', data);
     setWeather(data); // state에 현재 위치 기반 날씨 데이터 넣어주기
+    setLoading(false);
   };
 
   const getWeatherByCity = async () => {
     let url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+    setLoading(true);
     let response = await fetch(url);
     let data = await response.json();
     //console.log(`${city}의 날씨 data`, data);
     setWeather(data);
+    setLoading(false);
   };
 
   // useEffect 하나로 병합 - > 상황에 맞춰서 호출을 달리하기 !
@@ -66,10 +73,16 @@ function App() {
 
   return (
     <div>
-      <div className="container">
-        <WeatherBox weather={weather} />
-        <WeatherBtn cities={cities} setCity={setCity} />
-      </div>
+      {loading ? (
+        <div className="container">
+          <ClipLoader color="#ffffff" loading={loading} size={50} />
+        </div>
+      ) : (
+        <div className="container">
+          <WeatherBox weather={weather} />
+          <WeatherBtn cities={cities} setCity={setCity} />
+        </div>
+      )}
     </div>
   );
 }

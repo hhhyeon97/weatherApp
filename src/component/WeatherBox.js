@@ -4,11 +4,15 @@ import React from 'react';
 // props 안에 있는 weather를 끌고 오기
 const WeatherBox = ({ weather }) => {
   console.log('weather', weather);
+
+  // 화씨 온도를 소수점 아래 두 자리까지 표시
+  const fahrenheit = ((weather?.main.temp * 9) / 5 + 32).toFixed(2);
+
   return (
     <div className="weather-box">
       <div>{weather?.name}</div>
       <h3>
-        {weather?.main.temp}°C/ {(weather?.main.temp * 9) / 5 + 32} °F
+        {weather?.main.temp}°C / {fahrenheit} °F
       </h3>
       <h3>{weather?.weather[0].description}</h3>
     </div>
