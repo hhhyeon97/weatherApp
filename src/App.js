@@ -6,8 +6,8 @@ import WeatherBox from './component/WeatherBox';
 import WeatherBtn from './component/WeatherBtn';
 import ClipLoader from 'react-spinners/ClipLoader';
 //const apiKey = config.apiKey;
-const apiKey = '74283380a215dbfef8e3232bcff5db70';
-
+const apiKey = process.env.REACT_APP_API_KEY;
+// console.log(apiKey);
 /*
 1. 앱이 실행되면 현재 위치 기반의 날씨가 보인다.
 2. 날씨 정보에는 도시, 섭씨, 화씨, 날씨 상태
@@ -98,6 +98,9 @@ function App() {
 
   return (
     <div>
+      {/* <section className="header">
+        <img src="/웨더로고2.png"></img>
+      </section> */}
       {apiError ? ( // 에러 상태가 있는 경우 에러 메시지 표시
         <div className="container">
           <h2>에러 발생: {apiError}</h2>

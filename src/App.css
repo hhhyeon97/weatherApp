@@ -3,6 +3,7 @@ body {
   height: 100vh;
   background-repeat: no-repeat;
   background-size: cover;
+  /* background-color: aliceblue; */
 }
 
 .container {
@@ -11,7 +12,7 @@ body {
   align-items: center;
   height: 100vh;
   flex-direction: column;
-  color: white;
+  color: black;
   font-weight: bold;
 }
 
@@ -22,4 +23,16 @@ body {
   box-shadow: 2px 7px 15px 8px rgba(0, 0, 0, 0.1);
   margin-bottom: 20px;
   backdrop-filter: blur(10px);
+}
+
+.header {
+  display: flex;
+  position: fixed;
+  align-items: center;
+  justify-content: center;
+  left: 40%;
+}
+.header img {
+  width: 250px;
+  z-index: -10;
 }
