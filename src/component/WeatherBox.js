@@ -10,7 +10,7 @@ const WeatherBox = ({ weather }) => {
 
   return (
     <div className="weather-box">
-      <div>{weather?.name}</div>
+      <div className="city-name">{weather?.name}</div>
       <h3>
         {weather?.main.temp}°C / {fahrenheit} °F
       </h3>

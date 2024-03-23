@@ -1,5 +1,5 @@
 body {
-  background-image: url('https://i.pinimg.com/564x/d6/a9/ed/d6a9ed50f54c1650779e8b754dbb3a17.jpg');
+  background-image: url('https://i.pinimg.com/564x/5f/ae/ff/5faeffd0d801766699bd4ea4c8f1fd92.jpg');
   height: 100vh;
   background-repeat: no-repeat;
   background-size: cover;
@@ -22,7 +22,8 @@ body {
   border-radius: 10px;
   box-shadow: 2px 7px 15px 8px rgba(0, 0, 0, 0.1);
   margin-bottom: 20px;
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(7px);
+  text-align: center;
 }
 
 .button-area {
@@ -36,9 +37,22 @@ body {
   margin: 10px 5px;
 }
 
-h2 {
+.title {
   text-align: center;
   position: relative;
   top: 70px;
   font-weight: bold;
+  font-family: 'Archivo Black', sans-serif;
+}
+
+.date-area {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  top: 100px;
+  color: #4470eb;
+  font-weight: bold;
+  font-family: 'Noto Sans KR', sans-serif;
+  margin-bottom: 10px;
 }

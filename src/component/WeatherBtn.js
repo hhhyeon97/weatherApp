@@ -18,7 +18,7 @@ const WeatherBtn = ({ cities, setCity, selectedCity, getCurrentLocation }) => {
       {cities.map((item, index) => (
         <Button
           key={index}
-          variant={selectedCity === item ? 'primary' : 'light'}
+          variant={selectedCity === item ? 'secondary' : 'light'}
           onClick={() => setCity(item)}
         >
           {item}

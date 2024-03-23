@@ -23,6 +23,15 @@ function App() {
   const [selectedCity, setSelectedCity] = useState(null); // 선택된 도시를 관리하는 상태 추가
   const [apiError, setApiError] = useState(null); // 에러 상태 추가
   const cities = ['paris', 'new york', 'tokyo', 'seoul'];
+  const [currentDateTime, setCurrentDateTime] = useState(
+    new Date().toLocaleString([], {
+      year: 'numeric',
+      month: 'numeric',
+      day: 'numeric',
+      hour: 'numeric',
+      minute: 'numeric',
+    }),
+  ); // 현재 날짜와 시간 표시, 시간은 분까지만
 
   const getCurrentLocation = () => {
     try {
@@ -85,6 +94,21 @@ function App() {
     }
   }, [city]);
 
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setCurrentDateTime(
+        new Date().toLocaleString([], {
+          year: 'numeric',
+          month: 'numeric',
+          day: 'numeric',
+          hour: 'numeric',
+          minute: 'numeric',
+        }),
+      ); // 1분마다 현재 날짜와 시간 업데이트
+    }, 60000); // 1분마다 업데이트
+    return () => clearInterval(intervalId); // 컴포넌트가 언마운트되면 interval 해제
+  }, []);
+
   // useEffect의 역할 : component did update !
   // city state를 주시하고 있다가 city가 바뀌면 useEffect 함수 호출해주는 역할
   /*
@@ -98,9 +122,9 @@ function App() {
 
   return (
     <div>
-      <h2>
-        <i class="bx bxs-home"></i>Weather House
-      </h2>
+      <h2 className="title">Weather House</h2>
+      <span className="date-area">{currentDateTime}</span>
+      {/* 현재 날짜 및 시간 표시 */}
       {apiError ? ( // 에러 상태가 있는 경우 에러 메시지 표시
         <div className="container">
           <h3>에러 발생: {apiError}</h3>
