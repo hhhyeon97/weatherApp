@@ -18,7 +18,7 @@ body {
 
 .weather-box {
   border: 3px solid white;
-  padding: 50px;
+  padding: 40px;
   border-radius: 10px;
   box-shadow: 2px 7px 15px 8px rgba(0, 0, 0, 0.1);
   margin-bottom: 15px;
@@ -27,7 +27,6 @@ body {
 }
 
 .button-area {
-  margin-top: 30px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -65,4 +64,20 @@ body {
   align-items: center;
   position: relative;
   bottom: 50px;
+}
+
+.city-name {
+  font-weight: bold;
+  margin-bottom: 10px;
+  position: relative;
+  bottom: 20px;
+}
+
+.desc {
+  color: black;
+  font-size: 20px;
+}
+.icon-po {
+  position: relative;
+  bottom: 5px;
 }

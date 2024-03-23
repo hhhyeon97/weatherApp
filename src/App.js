@@ -22,6 +22,7 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [selectedCity, setSelectedCity] = useState(null); // 선택된 도시를 관리하는 상태 추가
   const [apiError, setApiError] = useState(null); // 에러 상태 추가
+  const [id, setId] = useState(null); // id 상태 추가
   const cities = ['paris', 'new york', 'tokyo', 'seoul'];
   const [currentDateTime, setCurrentDateTime] = useState(
     new Date().toLocaleString([], {
@@ -57,6 +58,7 @@ function App() {
       setWeather(data); // state에 현재 위치 기반 날씨 데이터 넣어주기
       setLoading(false);
       setSelectedCity(null); // 현재 위치 버튼 클릭 시 선택된 도시를 null로 설정
+      setId(data.weather[0].id);
       setApiError(null); // 에러 상태 초기화
     } catch (error) {
       console.log('에러', error);
@@ -76,6 +78,7 @@ function App() {
       setWeather(data);
       setLoading(false);
       setSelectedCity(city); // 선택된 도시 업데이트
+      setId(data.weather[0].id);
       setApiError(null); // 에러 상태 초기화
     } catch (error) {
       console.log('에러', error);
@@ -136,7 +139,7 @@ function App() {
             <ClipLoader color="#ffffff" loading={loading} size={50} />
           ) : (
             <div>
-              <WeatherBox weather={weather} />
+              <WeatherBox weather={weather} id={id} />
               <WeatherBtn
                 cities={cities}
                 setCity={setCity}
