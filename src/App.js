@@ -23,6 +23,7 @@ function App() {
   const [selectedCity, setSelectedCity] = useState(null); // 선택된 도시를 관리하는 상태 추가
   const [apiError, setApiError] = useState(null); // 에러 상태 추가
   const [id, setId] = useState(null); // id 상태 추가
+  const [query, setQuery] = useState('');
   const cities = ['paris', 'new york', 'tokyo', 'seoul'];
   const [currentDateTime, setCurrentDateTime] = useState(
     new Date().toLocaleString([], {
@@ -121,6 +122,31 @@ function App() {
   }, [city]);
   */
 
+  /* 검색 기능 */
+  const search = async (e) => {
+    if (e.key === 'Enter') {
+      if (query.trim() !== '') {
+        fetch(
+          `https://api.openweathermap.org/data/2.5/weather?q=${query}&appid=${apiKey}&units=metric`,
+        )
+          .then((res) => {
+            if (!res.ok) {
+              throw new Error('올바른 도시명을 입력해주세요.');
+            }
+            return res.json();
+          })
+          .then((result) => {
+            setWeather(result);
+            setQuery('');
+          })
+          .catch((error) => {
+            console.error('Error fetching data:', error);
+            setApiError(error.message);
+          });
+      }
+    }
+  };
+
   // weather 정보를 props로서 WeatherBox에 보내기
 
   return (
@@ -128,7 +154,13 @@ function App() {
       <h2 className="title">Weather House</h2>
       <span className="date-area">{currentDateTime}</span>
       {/* 현재 날짜 및 시간 표시 */}
-
+      <input
+        type="text"
+        placeholder="Enter city name"
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+        onKeyPress={search}
+      />
       {apiError ? ( // 에러 상태가 있는 경우 에러 메시지 표시
         <div className="container">
           <h3>에러 발생: {apiError}</h3>
