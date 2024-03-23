@@ -98,12 +98,12 @@ function App() {
 
   return (
     <div>
-      {/* <section className="header">
-        <img src="/웨더로고2.png"></img>
-      </section> */}
+      <h2>
+        <i class="bx bxs-home"></i>Weather House
+      </h2>
       {apiError ? ( // 에러 상태가 있는 경우 에러 메시지 표시
         <div className="container">
-          <h2>에러 발생: {apiError}</h2>
+          <h3>에러 발생: {apiError}</h3>
         </div>
       ) : (
         <div className="container">

@@ -7,7 +7,7 @@ const WeatherBtn = ({ cities, setCity, selectedCity, getCurrentLocation }) => {
   //console.log('cities?', cities);
 
   return (
-    <div>
+    <div className="button-area row">
       <Button
         key="current-location"
         variant={selectedCity === null ? 'secondary' : 'light'}
