@@ -21,8 +21,8 @@ body {
   padding: 50px;
   border-radius: 10px;
   box-shadow: 2px 7px 15px 8px rgba(0, 0, 0, 0.1);
-  margin-bottom: 20px;
-  backdrop-filter: blur(7px);
+  margin-bottom: 15px;
+  backdrop-filter: blur(5px);
   text-align: center;
 }
 
@@ -43,6 +43,7 @@ body {
   top: 70px;
   font-weight: bold;
   font-family: 'Archivo Black', sans-serif;
+  color: white;
 }
 
 .date-area {
@@ -51,8 +52,17 @@ body {
   justify-content: center;
   position: relative;
   top: 100px;
-  color: #4470eb;
+  color: #6ba4f8;
   font-weight: bold;
   font-family: 'Noto Sans KR', sans-serif;
   margin-bottom: 10px;
+  font-size: 20px;
+}
+
+.search-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  bottom: 50px;
 }

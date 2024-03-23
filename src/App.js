@@ -125,6 +125,7 @@ function App() {
       <h2 className="title">Weather House</h2>
       <span className="date-area">{currentDateTime}</span>
       {/* 현재 날짜 및 시간 표시 */}
+
       {apiError ? ( // 에러 상태가 있는 경우 에러 메시지 표시
         <div className="container">
           <h3>에러 발생: {apiError}</h3>
