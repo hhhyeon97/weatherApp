@@ -151,16 +151,19 @@ function App() {
 
   return (
     <div>
-      <h2 className="title">Weather House</h2>
-      <span className="date-area">{currentDateTime}</span>
-      {/* 현재 날짜 및 시간 표시 */}
-      <input
-        type="text"
-        placeholder="Enter city name"
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
-        onKeyPress={search}
-      />
+      <div className="top-content">
+        <h2 className="title">Weather House</h2>
+        <span className="date-area">{currentDateTime}</span>
+        {/* 현재 날짜 및 시간 표시 */}
+        <input
+          id="inputCity"
+          type="text"
+          placeholder="도시 이름을 입력하세요"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          onKeyPress={search}
+        />
+      </div>
       {apiError ? ( // 에러 상태가 있는 경우 에러 메시지 표시
         <div className="container">
           <h3>에러 발생: {apiError}</h3>

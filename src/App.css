@@ -9,7 +9,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 70vh;
   flex-direction: column;
   color: white;
   font-weight: bold;
@@ -38,32 +38,18 @@ body {
 
 .title {
   text-align: center;
-  position: relative;
-  top: 70px;
   font-weight: bold;
   font-family: 'Archivo Black', sans-serif;
   color: white;
+  margin-top: 30px;
 }
 
 .date-area {
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  position: relative;
-  top: 100px;
   color: #6ba4f8;
   font-weight: bold;
   font-family: 'Noto Sans KR', sans-serif;
-  margin-bottom: 10px;
   font-size: 20px;
-}
-
-.search-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  bottom: 50px;
+  margin-top: 10px;
 }
 
 .city-name {
@@ -72,7 +58,6 @@ body {
   position: relative;
   bottom: 20px;
 }
-
 .desc {
   color: black;
   font-size: 20px;
@@ -80,4 +65,21 @@ body {
 .icon-po {
   position: relative;
   bottom: 5px;
+}
+
+#inputCity {
+  font-family: 'Noto Sans KR', sans-serif;
+  border-radius: 5px;
+  margin-top: 30px;
+  padding: 10px;
+  outline: none;
+  border: 2px solid white;
+  z-index: 1000;
+}
+
+.top-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
