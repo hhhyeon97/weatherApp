@@ -37,13 +37,20 @@ function App() {
 
   const getCurrentLocation = () => {
     try {
-      navigator.geolocation.getCurrentPosition((position) => {
-        let lat = position.coords.latitude;
-        let lon = position.coords.longitude;
-        getWeatherByCurrentLocation(lat, lon);
-      });
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          let lat = position.coords.latitude;
+          let lon = position.coords.longitude;
+          getWeatherByCurrentLocation(lat, lon);
+        },
+        (error) => {
+          console.error('Error getting current location:', error);
+          // 위치 정보 액세스 거부 또는 오류 발생 시 사용자에게 메시지 표시
+          alert('현재 위치를 가져올 수 없습니다. 위치 설정을 확인해주세요.');
+        },
+      );
     } catch (error) {
-      console.log('에러', error);
+      console.error('Error getting current location:', error);
       setApiError('위치 정보를 가져오는 중 오류가 발생했습니다.');
       setLoading(false);
     }
