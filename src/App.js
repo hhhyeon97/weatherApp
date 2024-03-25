@@ -98,7 +98,7 @@ function App() {
 
   // useEffect 하나로 병합 - > 상황에 맞춰서 호출을 달리하기 !
   useEffect(() => {
-    if (city == '') {
+    if (city === '') {
       getCurrentLocation();
     } else {
       getWeatherByCity();
@@ -144,7 +144,8 @@ function App() {
           })
           .then((result) => {
             setWeather(result);
-            setQuery('');
+            setApiError(null); // 에러 초기화
+            setQuery(''); // 검색 성공 후 검색어 초기화
           })
           .catch((error) => {
             console.error('Error fetching data:', error);
