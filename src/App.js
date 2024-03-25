@@ -166,7 +166,7 @@ function App() {
         <input
           id="inputCity"
           type="text"
-          placeholder="도시 이름을 입력하세요"
+          placeholder="도시명을 영어로 검색해주세요 : )"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           onKeyPress={search}
