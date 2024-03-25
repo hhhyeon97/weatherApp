@@ -84,3 +84,9 @@ body {
   align-items: center;
   flex-direction: column;
 }
+
+.error-text {
+  color: rgb(194, 68, 68);
+  position: absolute;
+  top: 50%;
+}

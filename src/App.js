@@ -148,7 +148,7 @@ function App() {
             setQuery(''); // 검색 성공 후 검색어 초기화
           })
           .catch((error) => {
-            console.error('Error fetching data:', error);
+            //console.error('Error fetching data:', error);
             setApiError(error.message);
           });
       }
@@ -174,7 +174,7 @@ function App() {
       </div>
       {apiError ? ( // 에러 상태가 있는 경우 에러 메시지 표시
         <div className="container">
-          <h3>에러 발생: {apiError}</h3>
+          <h3 className="error-text">{apiError}</h3>
         </div>
       ) : (
         <div className="container">
